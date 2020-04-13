@@ -31,23 +31,16 @@ const IBRT_SI = (data) => {
   return currentlyInfectedSevereImpact(data) * (2 ** factor);
 };
 
-
-
-
-
 const covid19ImpactEstimator = (data) => ({
 
   impact: {
 
     currentlyInfected: currentlyInfectedImpact(data),
-    infectionsByRequestedTime: IBRTImpact(data),
-    
-
+    infectionsByRequestedTime: IBRTImpact(data)
   },
   severeImpact: {
     currentlyInfected: currentlyInfectedSevereImpact(data),
-    infectionsByRequestedTime: IBRT_SI(data),
-   
+    infectionsByRequestedTime: IBRT_SI(data)
   }
 
 });
