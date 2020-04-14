@@ -89,7 +89,7 @@ const covid19ImpactEstimator = (data) => ({
     casesForVentilatorsByRequestedTime: CFVBRTImpact(data),
     dollarsInFlight: DIFImpact(data)
   },
-  severeImpact: {
+  /* severeImpact: {
     currentlyInfected: currentlyInfectedSevereImpact(data),
     infectionsByRequestedTime: IBRT_SI(data),
     severeCasesByRequestedTime: SCBRT_SI(data),
@@ -97,7 +97,7 @@ const covid19ImpactEstimator = (data) => ({
     casesForICUByRequestedTime: CFICUBRT_SI(data),
     casesForVentilatorsByRequestedTime: CFVBRT_SI(data),
     dollarsInFlight: DIF_IS(data)
-  }
+  } */
 });
 
 export default covid19ImpactEstimator;
