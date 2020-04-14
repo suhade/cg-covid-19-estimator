@@ -94,5 +94,4 @@ const covid19ImpactEstimator = (data) => ({
     dollarsInFlight: DIF_SI(data)
   }
 });
-
 export default covid19ImpactEstimator;
