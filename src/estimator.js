@@ -6,7 +6,6 @@ const currentlyInfectedSevereImpact = (data) => data.reportedCases * 50;
 
 const convertToDays = (data) => {
   let days;
-
   if (data.periodType === 'days') {
     days = data.timeToElapse;
   } else if (data.periodType === 'weeks') {
@@ -63,8 +62,7 @@ const DIFImpact = (data) => {
   const { avgDailyIncomePopulation, avgDailyIncomeInUSD } = region;
 
   return Math.trunc(
-    (IBRTImpact(data) * avgDailyIncomePopulation * avgDailyIncomeInUSD) /
-    convertToDays(data)
+    (IBRTImpact(data) * avgDailyIncomePopulation * avgDailyIncomeInUSD) / convertToDays(data)
   );
 };
 
@@ -73,8 +71,7 @@ const DIF_SI = (data) => {
   const { avgDailyIncomePopulation, avgDailyIncomeInUSD } = region;
 
   return Math.trunc(
-    (IBRT_SI(data) * avgDailyIncomePopulation * avgDailyIncomeInUSD) /
-    convertToDays(data)
+    (IBRT_SI(data) * avgDailyIncomePopulation * avgDailyIncomeInUSD) / convertToDays(data)
   );
 };
 
@@ -99,5 +96,4 @@ const covid19ImpactEstimator = (data) => ({
     dollarsInFlight: DIF_IS(data)
   } 
 });
-
 export default covid19ImpactEstimator;
