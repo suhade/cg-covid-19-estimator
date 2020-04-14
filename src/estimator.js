@@ -6,6 +6,7 @@ const currentlyInfectedSevereImpact = (data) => data.reportedCases * 50;
 
 const convertToDays = (data) => {
   let days;
+
   if (data.periodType === 'days') {
     days = data.timeToElapse;
   } else if (data.periodType === 'weeks') {
@@ -13,6 +14,8 @@ const convertToDays = (data) => {
   } else if (data.periodType === 'months') {
     days = data.timeToElapse * 30;
   }
+
+  return days;
 };
 
 // impact: infectionsByRequestedTime
@@ -29,13 +32,9 @@ const IBRT_SI = (data) => {
   return currentlyInfectedSevereImpact(data) * 2 ** factor;
 };
 
-const SCBRTImpact = (data) => {
-  return Math.trunc(IBRTImpact(data) * 0.15);
-};
+const SCBRTImpact = (data) => Math.trunc(IBRTImpact(data) * 0.15);
 
-const SCBRT_SI = (data) => {
-  return Math.trunc(IBRTImpact(data) * 0.15);
-};
+const SCBRT_SI = (data) => Math.trunc(IBRTImpact(data) * 0.15);
 
 const HBBRTImpact = (data) => {
   const availBeds = data.totalHospitalBeds * 0.35;
@@ -60,19 +59,18 @@ const CFVBRT_SI = (data) => Math.trunc(0.02 * IBRT_SI(data));
 const DIFImpact = (data) => {
   const { region } = data;
   const { avgDailyIncomePopulation, avgDailyIncomeInUSD } = region;
+  const a = IBRTImpact(data) * avgDailyIncomePopulation * avgDailyIncomeInUSD;
 
-  return Math.trunc(
-    (IBRTImpact(data) * avgDailyIncomePopulation * avgDailyIncomeInUSD) / convertToDays(data)
-  );
+  return Math.trunc(a / convertToDays(data));
 };
 
 const DIF_SI = (data) => {
   const { region } = data;
   const { avgDailyIncomePopulation, avgDailyIncomeInUSD } = region;
 
-  return Math.trunc(
-    (IBRT_SI(data) * avgDailyIncomePopulation * avgDailyIncomeInUSD) / convertToDays(data)
-  );
+  const a = IBRT_SI(data) * avgDailyIncomePopulation * avgDailyIncomeInUSD;
+
+  return Math.trunc(a / convertToDays(data));
 };
 
 const covid19ImpactEstimator = (data) => ({
@@ -93,7 +91,8 @@ const covid19ImpactEstimator = (data) => ({
     hospitalBedsByRequestedTime: HBBRT_SI(data),
     casesForICUByRequestedTime: CFICUBRT_SI(data),
     casesForVentilatorsByRequestedTime: CFVBRT_SI(data),
-    dollarsInFlight: DIF_IS(data)
-  } 
+    dollarsInFlight: DIF_SI(data)
+  }
 });
+
 export default covid19ImpactEstimator;
