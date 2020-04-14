@@ -34,7 +34,7 @@ const IBRT_SI = (data) => {
 
 const SCBRTImpact = (data) => Math.trunc(IBRTImpact(data) * 0.15);
 
-const SCBRT_SI = (data) => Math.trunc(IBRTImpact(data) * 0.15);
+const SCBRT_SI = (data) => Math.trunc(IBRT_SI(data) * 0.15);
 
 const HBBRTImpact = (data) => {
   const availBeds = data.totalHospitalBeds * 0.35;
@@ -94,4 +94,6 @@ const covid19ImpactEstimator = (data) => ({
     dollarsInFlight: DIF_SI(data)
   }
 });
-export default covid19ImpactEstimator;
+
+console.log(covid19ImpactEstimator(data));
+// export default covid19ImpactEstimator;
