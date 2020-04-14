@@ -2,20 +2,19 @@
 import covid19Estimator from './estimator';
 
 const data = {
-
-  periodType: 'days',
-  population: 2024978,
   region: {
+    name: 'Africa',
     avgAge: 19.7,
-    avgDailyIncomeInUSD: 3,
-    avgDailyIncomePopulation: 0.73,
-    name: 'Africa'
+    avgDailyIncomeInUSD: 5,
+    avgDailyIncomePopulation: 0.71
   },
-  reportedCases: 100,
-  timeToElapse: 30,
-  totalHospitalBeds: 678874
-
+  periodType: 'days',
+  timeToElapse: 58,
+  reportedCases: 674,
+  population: 66622705,
+  totalHospitalBeds: 1380614
 };
+
 
 const result = covid19Estimator(data);
 
